@@ -1,0 +1,50 @@
+{
+    "name": "ycs77/laravel-crud-page",
+    "description": "Fast generate CRUD pages, controllers.",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "crud",
+        "generator",
+        "pages",
+        "controllers"
+    ],
+    "require": {
+        "ycs77/laravel-form-field-type": "^1.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.1",
+        "orchestra/testbench": "^3.8"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lucas Yang",
+            "email": "yangchenshin77@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Ycs77\\LaravelCrudPage\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ycs77\\LaravelCrudPage\\Test\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ycs77\\LaravelCrudPage\\CrudPageServiceProvider"
+            ],
+            "aliases": {
+                "Debugbar": "Ycs77\\LaravelCrudPage\\Facades\\CrudPage"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
