@@ -1,0 +1,40 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Http\Request;
+use Ycs77\LaravelCrudPage\Http\Controllers\CrudController;
+
+class DummyClass extends CrudController
+{
+    /**
+     * Get form fields.
+     * 
+     * @see https://github.com/ycs77/laravel-form-field-type
+     * 
+     * @return array
+     */
+    protected function formFields()
+    {
+        return [
+            'name' => [
+                'rules' => 'required|max:50',
+            ],
+            'submit',
+        ];
+    }
+
+    /**
+     * Get table fields.
+     *
+     * @see https://github.com/KABBOUCHI/laravel-table-view#usage
+     * 
+     * @return array
+     */
+    protected function getTableFields()
+    {
+        return [
+            'Name' => 'name',
+        ];
+    }
+}

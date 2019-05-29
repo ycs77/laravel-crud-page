@@ -5,6 +5,12 @@ namespace Ycs77\LaravelCrudPage\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
+ * @method static void routes(string $slug)
+ * @method static array getCrudConfig(string $slug, string $key)
+ * @method static array getCrudRoutes()
+ * @method static string|null getCrudRoute(string $slug, string $action)
+ * @method static bool hasCrudRoute(string $slug, string $action)
+ * 
  * @see \Ycs77\LaravelCrudPage\CrudPage
  */
 class CrudPage extends Facade
@@ -16,6 +22,6 @@ class CrudPage extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'laravel-crud-page';
+        return 'crud-page';
     }
 }

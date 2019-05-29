@@ -1,3 +1,6 @@
 /vendor
+/vendorx
 /node_modules
 /.vscode
+phpunit.xml
+.phpunit.result.cache
