@@ -10,6 +10,7 @@ Fast generate CRUD pages, controllers of the Laravel.
 
 * The form builder uses packages [Laravel form builder](https://github.com/kristijanhusak/laravel-form-builder) and [Laravel form field type](https://github.com/ycs77/laravel-form-field-type), config use [Laravel form builder BS4](https://github.com/ycs77/laravel-form-builder-bs4).
 * The table builder uses [kabbouchi/laravel-table-view](https://github.com/kabbouchi/laravel-table-view)
+* This package view uses [Fontawesome 5](https://fontawesome.com/) icon, This package requires manual installation.
 
 ## Installation
 
