@@ -20,7 +20,7 @@ class DummyClass extends CrudController
             'Title' => 'title',
         ];
     }
-    
+
     /**
      * Get form fields.
      * 

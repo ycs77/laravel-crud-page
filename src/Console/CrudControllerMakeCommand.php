@@ -25,7 +25,7 @@ class CrudControllerMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $type = 'CRUDController';
+    protected $type = 'CRUD Controller';
 
     /**
      * Get the stub file for the generator.
