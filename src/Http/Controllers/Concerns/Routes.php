@@ -3,7 +3,6 @@
 namespace Ycs77\LaravelCrudPage\Http\Controllers\Concerns;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
 
 trait Routes
 {
@@ -16,7 +15,7 @@ trait Routes
      */
     public function registerIndexRoute(string $slug, string $controller)
     {
-        $slug = $this->getSlug($slug);
+        $slug = $this->getPluralSlug($slug);
         Route::get("$slug", "$controller@index")->name("$slug.index");
 
         return [
@@ -33,7 +32,7 @@ trait Routes
      */
     public function registerCreateRoute(string $slug, string $controller)
     {
-        $slug = $this->getSlug($slug);
+        $slug = $this->getPluralSlug($slug);
         Route::get("$slug/create", "$controller@create")->name("$slug.create");
         Route::post("$slug", "$controller@store")->name("$slug.store");
 
@@ -52,7 +51,7 @@ trait Routes
      */
     public function registerShowRoute(string $slug, string $controller)
     {
-        $slug = $this->getSlug($slug);
+        $slug = $this->getPluralSlug($slug);
         Route::get("$slug/{id}", "$controller@show")->name("$slug.show");
 
         return [
@@ -69,7 +68,7 @@ trait Routes
      */
     public function registerEditRoute(string $slug, string $controller)
     {
-        $slug = $this->getSlug($slug);
+        $slug = $this->getPluralSlug($slug);
         Route::get("$slug/{id}/edit", "$controller@edit")->name("$slug.edit");
         Route::put("$slug/{id}", "$controller@update")->name("$slug.update");
 
@@ -88,22 +87,11 @@ trait Routes
      */
     public function registerDeleteRoute(string $slug, string $controller)
     {
-        $slug = $this->getSlug($slug);
+        $slug = $this->getPluralSlug($slug);
         Route::delete("$slug/{id}", "$controller@destroy")->name("$slug.destroy");
 
         return [
             'destroy' => "$slug.destroy",
         ];
-    }
-
-    /**
-     * Get resource slug.
-     *
-     * @param  string  $slug
-     * @return string
-     */
-    protected function getSlug(string $slug)
-    {
-        return Str::plural($slug);
     }
 }

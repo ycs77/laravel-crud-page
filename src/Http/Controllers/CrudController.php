@@ -86,6 +86,16 @@ class CrudController extends Controller
     }
 
     /**
+     * Get resource slug.
+     *
+     * @return string
+     */
+    protected function getPluralSlug()
+    {
+        return CrudPage::getPluralSlug($this->slug);
+    }
+
+    /**
      * Set request instance.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -279,7 +289,7 @@ class CrudController extends Controller
      */
     protected function getViewName(string $action)
     {
-        $slug = Str::plural($this->slug);
+        $slug = $this->getPluralSlug();
         $view = $this->config['view_prefix']
             ? "{$this->config['view_prefix']}$action"
             : "{$this->config['views_prefix']}$slug.$action";

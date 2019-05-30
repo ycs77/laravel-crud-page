@@ -3,6 +3,7 @@
 namespace Ycs77\LaravelCrudPage;
 
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Ycs77\LaravelCrudPage\Http\Controllers\Concerns\Routes;
 
@@ -41,6 +42,17 @@ class CrudPage
     {
         $this->app = $app;
         $this->config = $app['config'];
+    }
+
+    /**
+     * Get resource slug.
+     *
+     * @param  string  $slug
+     * @return string
+     */
+    public function getPluralSlug(string $slug)
+    {
+        return Str::plural($slug);
     }
 
     /**
