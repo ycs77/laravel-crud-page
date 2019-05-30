@@ -3,7 +3,6 @@
 namespace Ycs77\LaravelCrudPage\Http\Controllers\Actions;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 trait Delete
@@ -18,17 +17,17 @@ trait Delete
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int|array  $ids
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $ids)
+    public function destroy($ids)
     {
         $resAry = collect([]);
 
         foreach (Arr::wrap($ids) as $id) {
-            $model = $this->getModel($request, $id);
-            $resAry->push($this->destroyModel($model));
+            $model = $this->getModel($id);
+            $destroyRes = $this->destroyModel($model);
+            $resAry->push($destroyRes);
         }
 
         $res = $resAry->every(function ($value) {

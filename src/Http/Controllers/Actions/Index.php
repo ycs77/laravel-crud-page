@@ -2,7 +2,6 @@
 
 namespace Ycs77\LaravelCrudPage\Http\Controllers\Actions;
 
-use Illuminate\Http\Request;
 use Ycs77\LaravelCrudPage\Actions\CreateAction;
 
 trait Index
@@ -17,15 +16,15 @@ trait Index
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $model = $this->getModel($request)->makeHidden($this->tableHiddenFields);
+        $model = $this->getModel()->makeHidden($this->tableHiddenFields);
         $this->setModel($model);
 
-        $table = $this->getTable($this->getIndexTableFields())->paginate($this->perPage);
+        $table = $this->getTable($this->getIndexTableFields())
+            ->paginate($this->perPage);
         $createAction = new CreateAction();
 
         return view($this->getViewName('index'), [

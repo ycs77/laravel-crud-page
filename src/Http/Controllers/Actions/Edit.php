@@ -3,7 +3,6 @@
 namespace Ycs77\LaravelCrudPage\Http\Controllers\Actions;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 
 trait Edit
 {
@@ -17,13 +16,12 @@ trait Edit
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
-        $this->initModel($request, $id);
+        $this->initModel($id);
         $this->setFormFields($this->getEditFormFields());
         $form = $this->getEditForm($this->model, $id);
 
@@ -37,17 +35,16 @@ trait Edit
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        $this->initModel($request, $id);
+        $this->initModel($id);
         $this->setFormFields($this->getEditFormFields());
 
-        $data = $this->validateFormData($request);
-        $data = $this->storeFiles($request, $data);
+        $data = $this->validateFormData();
+        $data = $this->storeFiles($data);
         $data = $this->filterEditData($data);
 
         $res = $this->updateModel($this->model, $data);

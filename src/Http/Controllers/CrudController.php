@@ -13,7 +13,9 @@ use Ycs77\LaravelFormFieldType\Traits\FormFieldsTrait;
 
 class CrudController extends Controller
 {
-    use FormFieldsTrait;
+    use FormFieldsTrait {
+        validateFormData as traitValidateFormData;
+    }
     use Actions\Index,
         Actions\Create,
         Actions\Show,
@@ -37,6 +39,11 @@ class CrudController extends Controller
     protected $model;
 
     /**
+     * @var \Illuminate\Http\Request
+     */
+    protected $request;
+
+    /**
      * @var array
      */
     protected $formFields = [];
@@ -57,19 +64,19 @@ class CrudController extends Controller
     /**
      * Create base CRUD controller instance.
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $this->slug = $this->getSlug(request());
+        $this->setRequest($request);
+        $this->slug = $this->getSlug();
         $this->config = CrudPage::getCrudConfig($this->slug ?? 'default');
     }
 
     /**
      * Get resource slug.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    protected function getSlug(Request $request)
+    protected function getSlug()
     {
         if ($this->slug) {
             return $this->slug;
@@ -79,15 +86,26 @@ class CrudController extends Controller
     }
 
     /**
-     * Initial model instance.
+     * Set request instance.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @return self
+     */
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
+        return $this;
+    }
+
+    /**
+     * Initial model instance.
+     *
      * @param  int|null $id
      * @return void
      */
-    protected function initModel(Request $request, $id = null)
+    protected function initModel($id = null)
     {
-        $this->setModel($this->getModel($request, $id));
+        $this->setModel($this->getModel($id));
     }
 
     /**
@@ -104,11 +122,10 @@ class CrudController extends Controller
     /**
      * Get model instance.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int|null $id
      * @return \Illuminate\Database\Eloquent\Model|null
      */
-    protected function getModel(Request $request, $id = null)
+    protected function getModel($id = null)
     {
         if (!$this->config['model']) {
             return;
@@ -239,6 +256,19 @@ class CrudController extends Controller
     }
 
     /**
+     * Validate request form data and return.
+     *
+     * @param  array|null $fields
+     * @return array
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function validateFormData(array $fields = null)
+    {
+        return $this->traitValidateFormData($this->request, $fields);
+    }
+
+    /**
      * Get view name.
      *
      * @param  string  $action
@@ -272,13 +302,12 @@ class CrudController extends Controller
     /**
      * Store upload files to storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  array  $data
      * @return array
      */
-    protected function storeFiles(Request $request, array $data)
+    protected function storeFiles(array $data)
     {
-        foreach ($request->file() as $filename => $file) {
+        foreach ($this->request->file() as $filename => $file) {
             $data[$filename] = $file->store($this->config['file_store']);
         }
 

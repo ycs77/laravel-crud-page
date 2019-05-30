@@ -2,7 +2,6 @@
 
 namespace Ycs77\LaravelCrudPage\Http\Controllers\Actions;
 
-use Illuminate\Http\Request;
 use Ycs77\LaravelCrudPage\Actions;
 
 trait Show
@@ -10,13 +9,12 @@ trait Show
     /**
      * Display the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $model = $this->getModel($request, $id)->makeHidden($this->tableHiddenFields);
+        $model = $this->getModel($id)->makeHidden($this->tableHiddenFields);
         $this->setModel($model);
 
         $data = $this->getShowData();

@@ -2,9 +2,6 @@
 
 namespace Ycs77\LaravelCrudPage\Http\Controllers\Actions;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-
 trait Create
 {
     /**
@@ -17,10 +14,9 @@ trait Create
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         $this->setFormFields($this->getCreateFormFields());
         $form = $this->getCreateForm();
@@ -34,19 +30,18 @@ trait Create
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        $this->initStaticModel($request);
+        $this->initStaticModel();
         $this->setFormFields($this->getCreateFormFields());
 
-        $data = $this->validateFormData($request);
-        $data = $this->storeFiles($request, $data);
+        $data = $this->validateFormData();
+        $data = $this->storeFiles($data);
         $data = $this->filterCreateData($data);
 
-        $res = $this->createModel($this->model, $data);
+        $res = $this->createModel($data);
 
         return $this->sendCreateResponse($res);
     }
@@ -85,13 +80,12 @@ trait Create
     /**
      * Create the model.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
      * @param  array  $data
      * @return bool
      */
-    protected function createModel(Model $model, array $data)
+    protected function createModel(array $data)
     {
-        return (bool)$model->create($data);
+        return (bool)$this->model->create($data);
     }
 
     /**
