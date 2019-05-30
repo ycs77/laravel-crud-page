@@ -55,15 +55,6 @@ Add your resource to config:
 ],
 ```
 
-### Routes
-
-Add resources routes (resource `post` is example):
-
-*config/crud-page.php*
-```php
-CrudPage::routes('post');
-```
-
 ### Controller
 
 Create controller:
@@ -77,6 +68,20 @@ Created a new CRUD controller:
 ```php
 class PostController extends CrudController
 {
+    /**
+     * Get table fields.
+     *
+     * @see https://github.com/KABBOUCHI/laravel-table-view#usage
+     * 
+     * @return array
+     */
+    protected function getTableFields()
+    {
+        return [
+            'Title' => 'title',
+        ];
+    }
+
     /**
      * Get form fields.
      * 
@@ -98,22 +103,17 @@ class PostController extends CrudController
             'submit',
         ];
     }
-
-    /**
-     * Get table fields.
-     *
-     * @see https://github.com/KABBOUCHI/laravel-table-view#usage
-     * 
-     * @return array
-     */
-    protected function getTableFields()
-    {
-        return [
-            'Title' => 'title',
-        ];
-    }
 }
 
+```
+
+### Routes
+
+Add resources routes (resource `post` is example):
+
+*config/crud-page.php*
+```php
+CrudPage::routes('post');
 ```
 
 ### View
