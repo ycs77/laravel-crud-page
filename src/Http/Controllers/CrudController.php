@@ -119,6 +119,16 @@ class CrudController extends Controller
     }
 
     /**
+     * Initial model instance.
+     *
+     * @return void
+     */
+    protected function initStaticModel()
+    {
+        $this->setStaticModel($this->getStaticModel());
+    }
+
+    /**
      * Set static model.
      *
      * @return void
