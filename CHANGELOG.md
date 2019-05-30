@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.1
+- Add plural slug method
+- Remove more space
+- Fix crud controller command typo
 ## 1.0.0
 - Add request proterty to CrudController
 - Add initStaticModel method on CrudController
