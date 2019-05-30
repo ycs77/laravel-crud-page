@@ -101,22 +101,23 @@ class CrudController extends Controller
      * Initial model instance.
      *
      * @param  int|null $id
-     * @return void
+     * @return self
      */
     protected function initModel($id = null)
     {
-        $this->setModel($this->getModel($id));
+        return $this->setModel($this->getModel($id));
     }
 
     /**
      * Set model instance.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @return void
+     * @return self
      */
     protected function setModel($model)
     {
         $this->model = $model;
+        return $this;
     }
 
     /**
@@ -138,21 +139,22 @@ class CrudController extends Controller
     /**
      * Initial model instance.
      *
-     * @return void
+     * @return self
      */
     protected function initStaticModel()
     {
-        $this->setStaticModel($this->getStaticModel());
+        return $this->setStaticModel($this->getStaticModel());
     }
 
     /**
      * Set static model.
      *
-     * @return void
+     * @return self
      */
     protected function setStaticModel()
     {
         $this->model = $this->getStaticModel();
+        return $this;
     }
 
     /**
@@ -237,11 +239,12 @@ class CrudController extends Controller
     /**
      * Get form fields.
      * 
-     * @return void
+     * @return self
      */
     public function setFormFields($formFields)
     {
         $this->formFields = $formFields;
+        return $this;
     }
 
     /**
