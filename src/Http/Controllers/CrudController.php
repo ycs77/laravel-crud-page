@@ -132,7 +132,7 @@ class CrudController extends Controller
         }
 
         $model = app($this->config['model']);
-        return $id ? $model->find($id) : $model->all();
+        return $id ? $model->findOrFail($id) : $model->all();
     }
 
     /**
