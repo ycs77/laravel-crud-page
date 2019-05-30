@@ -22,7 +22,6 @@ trait Create
      */
     public function create(Request $request)
     {
-        $this->initModel($request);
         $this->setFormFields($this->getCreateFormFields());
         $form = $this->getCreateForm();
 
@@ -40,7 +39,7 @@ trait Create
      */
     public function store(Request $request)
     {
-        $this->initModel($request);
+        $this->initStaticModel($request);
         $this->setFormFields($this->getCreateFormFields());
 
         $data = $this->validateFormData($request);
