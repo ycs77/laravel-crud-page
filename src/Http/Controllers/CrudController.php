@@ -281,8 +281,8 @@ class CrudController extends Controller
     {
         $slug = Str::plural($this->slug);
         $view = $this->config['view_prefix']
-            ? "{$this->config['view_prefix']} $action"
-            : "{$this->config['views_prefix']}  $slug.$action";
+            ? "{$this->config['view_prefix']}$action"
+            : "{$this->config['views_prefix']}$slug.$action";
 
         if (view()->exists($view)) {
             return $view;
