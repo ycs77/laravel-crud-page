@@ -1,6 +1,7 @@
 /vendor
-/vendorx
 /node_modules
 /.vscode
+composer.phar
+composer.lock
 phpunit.xml
-.phpunit.result.cache
+*.cache
